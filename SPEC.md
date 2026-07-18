@@ -36,7 +36,10 @@ the reply without it — graceful degradation is a feature, not a fallback.
 
 - `kind` (string, optional in 1.0, default `"options"`): the projection type
   and THE extension point. Surfaces MUST ignore projections whose kind they
-  cannot render (and SHOULD say so in prose context).
+  cannot render (and SHOULD say so in prose context). **Kind governance**:
+  new kinds are minted only by pull request to this repository — one
+  registry, no forked vocabularies. Private experiments use an `x-` prefix
+  (`x-myapp-chart`), which conforming surfaces treat as unknown.
 - `options`: 2–8 entries. `label` is what the surface shows; `value` is the
   exact user-turn text sent back on selection.
 
@@ -55,6 +58,12 @@ A conforming surface:
    values are model output; a surface must not execute, navigate, or grant
    anything based on them outside the conversation channel itself.
 5. Never invents selections the user (or selecting agent) did not make.
+6. **Exposes the truth behind a label.** A `label` and its `value` can
+   disagree — that mismatch is the phishing surface inside a trusted UI
+   (a key labeled "Cancel" whose value asks for something else). A
+   conforming surface MUST let the user inspect an option's exact `value`
+   before selecting (hover, long-press, or equivalent), and SHOULD visually
+   flag options whose value diverges semantically from their label.
 
 ## 4. Teaching the model
 
@@ -77,3 +86,11 @@ string is never versioned in the wire form.
   [kody-w/rapp-canary](https://github.com/kody-w/rapp-canary)
 - Teacher: `agents/holo_agent.py` (HoloAgent / `ProjectHoloOptions`)
 - Fly it: `curl -fsSL https://kody-w.github.io/rapp-train/flight.sh | bash -s -- canary feature/voice-gesturepad` → `http://localhost:7075/vui`
+
+## 7. Licensing
+
+The specification text is licensed CC-BY-4.0 (quote it, translate it,
+teach it — with attribution). Code in this repository is Apache-2.0.
+Neither grants trademark rights — see
+[TRADEMARKS](https://kody-w.github.io/rapp-train/TRADEMARKS.md); conforming
+integrations self-license the marks under the integration license there.
