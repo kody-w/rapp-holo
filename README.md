@@ -1,3 +1,7 @@
+<!-- retired-notice:start -->
+> **Retired experiment, kept for reference.** The living project is [kody-w/RAPP](https://github.com/kody-w/RAPP).
+<!-- retired-notice:end -->
+
 # 🔮 rapp-holo — AI interaction past chat and voice
 
 <!-- rapp1:network-header:start -->
